@@ -10,5 +10,7 @@ def create_app(config_name):
     config_options[config_name].init_app(app)
    
     bootstrap.init_app(app)
-  
+    #register blueprint
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
     return app
