@@ -1,7 +1,7 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required, current_user
-from .forms import UpdateProfile,BlogForm
+from .forms import UpdateProfile,BlogForm,CommentForm
 from ..models import  User,Post
 from .. import db
 from flask.helpers import flash
@@ -98,3 +98,30 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))  
+
+@main.route('/comment/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def comment(post_id):
+    form = CommentForm()
+    post = Post.query.get(post_id)
+    user = User.query.all()
+    comments = Comment.query.filter_by(post_id=post_id).all()
+    if form.validate_on_submit():
+        comment = form.comment.data
+        post_id = post_id
+        user_id = current_user._get_current_object().id
+        new_comment = Comment(
+            comment=comment,
+            post_id=post_id,
+            user_id=user_id
+        )
+        new_comment.save_comment()
+        new_comments = [new_comment]
+        print(new_comments)
+        flash('Your comment has been created successfully!')
+        return redirect(url_for('.comment', post_id=post_id))
+    return render_template('comments.html', form=form, post=post, comments=comments, user=user)
+
+
+
+

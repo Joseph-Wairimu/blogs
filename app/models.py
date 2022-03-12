@@ -38,3 +38,21 @@ class Post(db.Model):
         db.session.commit()
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"   
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key = True)
+    comment = db.Column(db.Text(), nullable = False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete_comment(self):
+        db.session.delete(self)
+        db.session.commit()
+    def __repr__(self):
+        return f'Comment: {self.comment}'        
