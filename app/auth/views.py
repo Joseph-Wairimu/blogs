@@ -4,7 +4,6 @@ from ..models import User
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..email import mail_message
-
 from .. import db
 
 
@@ -48,7 +47,6 @@ def signup():
     
     return render_template('auth/signup.html')
 
-
 @auth.route('/signup',methods=['POST'])
 def signup_post():
     email = request.form.get('email')
@@ -66,11 +64,10 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
-   
-    mail_message("Welcome to Blog site","email/welcome_user",user.email,user=user)
-    return redirect(url_for('auth.login'))
-    title = "New Account"    
+    mail_message("Welcome to Blog site","email/welcome_user",new_user.email,user=new_user)
 
+    return redirect(url_for('auth.login'))
+    title = "New Account"
 
 @auth.route('/logout')
 @login_required
