@@ -1,5 +1,7 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort
+from flask_login import login_required
+#....
 
 @main.route('/')
 def index():
