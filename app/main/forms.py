@@ -16,4 +16,8 @@ class BlogForm(FlaskForm):
   category = SelectField("Choose your desired category:",choices=  [ ('Personal_blogs','Personal_blogs'), ('corporate_blogs','corporate_blogs'), ('Fashion_blogs','Fashion_blogs'),('Lifestyle_blogs','Lifestyle_blogs'),('Travel_blogs','Travel_blogs')] )
   submit = SubmitField('Submit')
 
-                                  
+
+class CommentForm(FlaskForm):
+  comment = TextAreaField('Add a Comment:',validators=[DataRequired()])
+  username= StringField(' Name:',validators=[DataRequired()])
+  submit = SubmitField(' Submit')                                  
