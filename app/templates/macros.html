@@ -4,7 +4,76 @@
 
 
 {% for post in posts%}
+<div class="col-md-3" >
+    <div class="card  mb-3" id="card1" style="background-color:#1E5128;color: aliceblue;" >
+        
+        <div class="card-header">{{post.title}}</div>
+        <div class="card-body">
+            <h5 class="card-title">{{post.category}}</h5>
 
+            <p class="card-text">{{post.added_date.strftime('%b %d, %Y')}}</p>
+            <p class="card-text" style="font-family: 'IM Fell English', serif;">{{post.post}}</p>
+               
+            <a href="{{url_for('main.comment',post_id=post.id)}}" class="btn btn-secondary">Leave a Comment..</a>
+            <div class="voting">
+                <button id="likebtn">
+                    <i class="fa fa-thumbs-up"></i>
+                </button>
+                <input type="number" id="input1" value="0" name="" min="0">
+                
+                <button id="dislikebtn">
+                    <i class="fa fa-thumbs-down"></i>
+                </button>
+                <input type="number" id="input2" value="0" name="" min="0">
+
+                </div>
+
+                <style>
+                 input{
+                     width: 50px;
+                     border: none;
+                     background: none;
+                     color: #919191;
+                     font-size: 20px;
+                     margin: 0 5px;
+                 }
+                 button{
+                     color: #fff;
+                     background:none ;
+                     border: none;
+                     font-size: 20px;
+                     padding: 0 5px;
+                     margin: 10px 0;
+                     margin-left: 10px;
+                     cursor: pointer;
+                 }
+                 button:active{
+
+                    color: #004eff;
+                    transform: scale(1,2);
+                 }
+                    
+                </style>
+                <script type="text/javascript">
+                 let likebtn=document.querySelector('#likebtn')
+                 let dislikebtn=document.querySelector('#dislikebtn')
+
+
+                 let input1=document.querySelector('#input1')
+                 let input2=document.querySelector('#input2')
+                 likebtn.addEventListener('click',()=>{
+                     input1.value=parseInt(input1.value)+1;
+                     input1.style.color='#12ff00'
+                 })
+                 dislikebtn.addEventListener('click',()=>{
+                     input2.value=parseInt(input2.value)+1;
+                     input2.style.color='#ff0000'
+                 })
+
+                </script>
+        </div>
+    </div>
+</div>
 
 
 

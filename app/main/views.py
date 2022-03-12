@@ -1,9 +1,10 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required, current_user
-from .forms import UpdateProfile
+from .forms import UpdateProfile,BlogForm
 from ..models import  User,Post
 from .. import db
+from flask.helpers import flash
 #....
 
 @main.route('/')
@@ -24,7 +25,7 @@ def posts():
 @main.route('/new_post', methods=['GET', 'POST'])
 @login_required
 def new_post():
-    form = PostForm()
+    form = BlogForm()
     if form.validate_on_submit():
         title = form.title.data
         post = form.post.data
@@ -36,7 +37,7 @@ def new_post():
         db.session.add(new_post)
         db.session.commit()
         # post_obj.save()
-        flash('Your pitch has been created successfully!')
+        flash('Your blog has been created successfully!')
         return redirect(url_for('main.index',uname=current_user.username))
     return render_template('recent_blog.html', form=form ,title='Pitch Perfect')
 

@@ -1,7 +1,10 @@
 from . import db
-from werkzeug.security import generate_password_hash,check_password_hash
+from . import login_manager
 from flask_login import UserMixin
 from . import login_manager
+from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+
 
 
 class User(UserMixin,db.Model):
@@ -26,3 +29,12 @@ class Post(db.Model):
     added_date = db.Column(db.DateTime,default=datetime.utcnow)
     author = db.Column(db.Integer,db.ForeignKey('users.id'))
 
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}')"   
