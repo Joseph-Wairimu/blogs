@@ -3,6 +3,7 @@ from . import auth
 from ..models import User
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from ..email import mail_message
 
 from .. import db
 
@@ -66,7 +67,7 @@ def signup_post():
     db.session.commit()
 
    
-
+    mail_message("Welcome to Blog site","email/welcome_user",user.email,user=user)
     return redirect(url_for('auth.login'))
     title = "New Account"    
 
