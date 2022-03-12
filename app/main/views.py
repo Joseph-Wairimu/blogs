@@ -26,9 +26,9 @@ def index():
 def posts():
 
     Personal_blogs= Post.query.filter_by(category='Personal_blogs').all()
-    corporate_blogs = Post.query.filter_by(category='corporate blogs').all()
-    Fashion_blogs= Post.query.filter_by(category='Fashion blogs').all()
-    Lifestyle_blogs = Post.query.filter_by(category='Lifestyle blogs').all()
+    corporate_blogs = Post.query.filter_by(category='corporate_blogs').all()
+    Fashion_blogs= Post.query.filter_by(category='Fashion_blogs').all()
+    Lifestyle_blogs = Post.query.filter_by(category='Lifestyle_blogs').all()
     Travel_blogs = Post.query.filter_by(category='Travel_blogs').all()
     posts = Post.query.order_by(Post.added_date.desc()).all()
     return render_template('blog.html',Personal_blogs=Personal_blogs, corporate_blogs= corporate_blogs, Fashion_blogs= Fashion_blogs,Lifestyle_blogs=Lifestyle_blogs,Travel_blogs=Travel_blogs, posts=posts)
@@ -43,7 +43,7 @@ def new_post():
         category = form.category.data
         user_id = current_user._get_current_object().id
       
-        new_post=Post(title=title,post=post,category=category)
+        new_post=Post(title=title,post=post,category=category )
         new_post.save()
         db.session.add(new_post)
         db.session.commit()
@@ -118,7 +118,7 @@ def comment(post_id):
         new_comment.save_comment()
         new_comments = [new_comment]
         print(new_comments)
-        flash('Your comment has been created successfully!')
+       
         return redirect(url_for('.comment', post_id=post_id))
     return render_template('comments.html', form=form, post=post, comments=comments, user=user)
 

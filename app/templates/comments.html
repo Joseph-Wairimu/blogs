@@ -18,11 +18,16 @@
         </div>
         <div class="col-md-6">
             <div class="row">
+               
                 {% for comment in comments%}
                 <div class="col-md-12">
-                    <div class="card w-50 mt-3">
+                    <div style="background-color: black;color: white;" class="card w-50 mt-3">
                         <div class="card-body">
                             <h5 class="card-title"></h5>
+                            {% for userr in user%}
+                            <p class="card-text">{{userr.user}}</p>
+                            {% endfor%}
+                            <p class="card-text">{{comment.comment}}</p>
                             <p class="card-text">{{comment.comment}}</p>
 
                         </div>
