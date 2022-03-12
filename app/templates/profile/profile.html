@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container">
 <div class="row">
-<!-- displaying  Username-->
+
   <div class="col-md-4">
     <h3> {{user.username| capitalize}} </h3>
 
-    <!--Displaying user bio-->
+  
     {% if user.bio %}
       <p> {{user.bio}}</p>
     {%else%}
@@ -17,7 +17,6 @@
   </div>
 
 
-  <!--Display profile photo-->
   <div class="col-md-4">
     {% if user.profile_pic_path %}
 
@@ -32,11 +31,30 @@
     </form>
     {% endif %}
 
+ 
+    </div>
      
   </div>
 </div>
 </div>
-<div class=" container row">
-  {{macro.display_post(posts)}}
-</div>
+<div class="col-md-1">
+    <div class="col-md-5" id="user">
+      {% if current_user %}
+      {% for post in posts%}
+      <h3>You have {{user.postgs.count()}} Blogs</h3>
+      <div class="card blog">
+        <h4>Title: {{post.title}}</h4>
+        <h6>{{post.post}}</h6>
+        <p>{{post.comment.count()}} Comments</p>
+      </div>
+      <hr>
+
+      {%endfor%}
+      {%else%}
+      <h3>You have ) posts</h3>
+      {%endif%}
+
+    </div>
+  </div>
+
 {% endblock %}

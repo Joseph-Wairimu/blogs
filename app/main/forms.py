@@ -9,10 +9,12 @@ class UpdateProfile(FlaskForm):
 
 
 class BlogForm(FlaskForm):
-  title = StringField(' title:',validators=[DataRequired()]) 
-  post = StringField(' post:',validators=[DataRequired()]) 
-  username= StringField(' username:',validators=[DataRequired()])
-  category = SelectField("Choose your desired category:",choices=[('interview_pitch','interview_pitch'),('pickup_lines','pickup_lines'),('product_pitch','product_pitch'),('promotion_pitch','promotion_pitch'),('Humour_pitch','Humour_pitch')])
+  
+  title = StringField(' About:',validators=[DataRequired()]) 
+  post = TextAreaField('Blog Description:',validators=[DataRequired()]) 
+  username= StringField(' Author:',validators=[DataRequired()])
+ 
+  
 
   submit = SubmitField('Submit')
                                   

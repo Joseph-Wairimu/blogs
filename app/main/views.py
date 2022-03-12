@@ -10,13 +10,7 @@ from flask.helpers import flash
 @main.route('/')
 def index():
     
-    pickup_lines= Post.query.filter_by(category='pickup_lines').all()
-    interview_pitch = Post.query.filter_by(category='interview_pitch').all()
-    product_pitch= Post.query.filter_by(category='product_pitch').all()
-    promotion_pitch = Post.query.filter_by(category='promotion_pitch').all()
-    Humour_pitch = Post.query.filter_by(category='Humour_pitch').all()
-    posts = Post.query.order_by(Post.added_date.desc()).all()
-    return render_template('index.html',interview_pitch=interview_pitch, pickup_lines=pickup_lines,  product_pitch= product_pitch,promotion_pitch=promotion_pitch,Humour_pitch=Humour_pitch, posts=posts)
+    return render_template('index.html')
 
 
 
@@ -35,22 +29,24 @@ def new_post():
     if form.validate_on_submit():
         title = form.title.data
         post = form.post.data
-        category = form.category.data
+        # category = form.category.data
         user_id = current_user._get_current_object().id
       
-        new_post=Post(title=title,post=post,category=category)
+        new_post=Post(title=title,post=post)
         new_post.save()
         db.session.add(new_post)
         db.session.commit()
         # post_obj.save()
         flash('Your blog has been created successfully!')
-        return redirect(url_for('main.index',uname=current_user.username))
-    return render_template('recent_blog.html', form=form ,title='Pitch Perfect')
+        return redirect(url_for('.posts',uname=current_user.username))
+    return render_template('recent_blog.html', form=form ,title='Blog ')
 
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    author = current_user._get_current_object().id
+    posts = Post.query.filter_by(author = author).all()
     '''
     View root page function that returns the index page and its data
     '''
@@ -58,7 +54,7 @@ def profile(uname):
     if user is None:
         abort(404)
     
-    return render_template('profile/profile.html',user = user) 
+    return render_template('profile/profile.html',user = user,posts=posts) 
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
@@ -78,7 +74,7 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update.html',form =form)         
+    return render_template('profile/update.html',form =form,posts=posts)         
 
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
