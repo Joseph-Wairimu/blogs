@@ -9,18 +9,29 @@ from flask.helpers import flash
 
 @main.route('/')
 def index():
-    
-    return render_template('index.html')
+    Personal_blogs= Post.query.filter_by(category='Personal_blogs').all()
+    corporate_blogs = Post.query.filter_by(category='corporate blogs').all()
+    Fashion_blogs= Post.query.filter_by(category='Fashion blogs').all()
+    Lifestyle_blogs = Post.query.filter_by(category='Lifestyle blogs').all()
+    Travel_blogs = Post.query.filter_by(category='Travel_blogs').all()
+    posts = Post.query.order_by(Post.added_date.desc()).all()
+    return render_template('index.html',Personal_blogs=Personal_blogs, corporate_blogs= corporate_blogs, Fashion_blogs= Fashion_blogs,Lifestyle_blogs=Lifestyle_blogs,Travel_blogs=Travel_blogs, posts=posts)
 
 
+                   
+                   
 
 @main.route('/posts')
 @login_required
 def posts():
-    posts = Post.query.all()
-    user = current_user
-    return render_template('blog.html', posts=posts, user=user)
 
+    Personal_blogs= Post.query.filter_by(category='Personal_blogs').all()
+    corporate_blogs = Post.query.filter_by(category='corporate blogs').all()
+    Fashion_blogs= Post.query.filter_by(category='Fashion blogs').all()
+    Lifestyle_blogs = Post.query.filter_by(category='Lifestyle blogs').all()
+    Travel_blogs = Post.query.filter_by(category='Travel_blogs').all()
+    posts = Post.query.order_by(Post.added_date.desc()).all()
+    return render_template('blog.html',Personal_blogs=Personal_blogs, corporate_blogs= corporate_blogs, Fashion_blogs= Fashion_blogs,Lifestyle_blogs=Lifestyle_blogs,Travel_blogs=Travel_blogs, posts=posts)
 
 @main.route('/new_post', methods=['GET', 'POST'])
 @login_required
@@ -29,10 +40,10 @@ def new_post():
     if form.validate_on_submit():
         title = form.title.data
         post = form.post.data
-        # category = form.category.data
+        category = form.category.data
         user_id = current_user._get_current_object().id
       
-        new_post=Post(title=title,post=post)
+        new_post=Post(title=title,post=post,category=category)
         new_post.save()
         db.session.add(new_post)
         db.session.commit()

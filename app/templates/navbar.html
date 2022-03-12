@@ -10,11 +10,8 @@
                     <a href="{{ url_for('main.index') }}" class="navbar-item">
                         Home
                     </a>
-                    {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('main.profile',uname=current_user.username) }}" class="navbar-item">
-                        Profile
-                    </a>
-                    {% endif %}
+                
+                   
                     {% if not current_user.is_authenticated %}
                     <a href="{{ url_for('auth.login') }}" class="navbar-item">
                         Login
@@ -26,10 +23,60 @@
                     {% if current_user.is_authenticated %}
                     <a class="navbar-item"href="{{url_for('main.posts')}}">Blogs</a>
                     <a class="navbar-item"href="{{url_for('main.new_post')}}">Add-Blog</a>
-                    <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                        Logout
-                    </a>
-                    {% endif %}
+                   
+                    
+                     
+                    <div class="dropdown is-active">
+                        <div class="dropdown-trigger">
+                          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <span>    {% if current_user.is_authenticated %}
+                                {{ current_user.username }}
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" style="color:white;" href="{{ url_for('auth.login') }}">Login in</a></li>
+                            {% endif %} </span>
+                            <span class="icon is-small">
+                              <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                          <div class="dropdown-content">
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            <a href="{{ url_for('main.profile',uname=current_user.username) }}" class="navbar-item">
+                                Profile
+                            </a>
+                            <hr class="dropdown-divider">
+                            <i class="navbar-dropdown fa fa-cog">&nbsp;<a href="#">Settings</a></i>
+                          </div>
+                        </div>
+                      </div>
+
+                      {% endif %}
+                      <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+                        if ($navbarBurgers.length > 0) {
+                          $navbarBurgers.forEach(function ($el) {
+                            $el.addEventListener('click', function () {
+                        e
+                              var target = $el.dataset.target;
+                              var $target = document.getElementById(target);
+                              $el.classList.toggle('is-active');
+                              $target.classList.toggle('is-active');
+                            });
+                          });
+                        }
+                        });
+                        </script>
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
