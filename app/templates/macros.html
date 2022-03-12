@@ -5,18 +5,22 @@
 
 {% for post in posts%}
 <div class="col-md-3" >
-    <div class="card  mb-3" id="card1" style="background-color:#1E5128;color: aliceblue;" >
-        
-        <div class="card-header">{{post.title}}</div>
+    <div class="card  mb-3" id="card1" style="background-color:black; text-align: center; color: aliceblue;" >
+        <h5 class="card-header "  >{{post.category}}</h5>
+       
         <div class="card-body">
-            <h5 class="card-title">{{post.category}}</h5>
-
-            <p class="card-text">{{post.added_date.strftime('%b %d, %Y')}}</p>
+           
+            <div class="card-title">{{post.title}}</div>
+            
             <p class="card-text" style="font-family: 'IM Fell English', serif;">{{post.post}}</p>
-               
-            <a href="{{url_for('main.comment',post_id=post.id)}}" class="btn btn-secondary">Leave a Comment..</a>
+            <p class="card-text">{{post.added_date.strftime('%b %d, %Y')}}</p>
+            
+                
+            </button>
+         
             <div class="voting">
                 <button id="likebtn">
+                  
                     <i class="fa fa-thumbs-up"></i>
                 </button>
                 <input type="number" id="input1" value="0" name="" min="0">
@@ -25,7 +29,9 @@
                     <i class="fa fa-thumbs-down"></i>
                 </button>
                 <input type="number" id="input2" value="0" name="" min="0">
-
+                <a style="color: white;" href="{{url_for('main.comment',post_id=post.id)}}" > 
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                </a>
                 </div>
 
                 <style>

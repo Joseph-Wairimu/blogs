@@ -2,7 +2,7 @@ from . import main
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required, current_user
 from .forms import UpdateProfile,BlogForm,CommentForm
-from ..models import  User,Post
+from ..models import  User,Post,Comment
 from .. import db
 from flask.helpers import flash
 #....
