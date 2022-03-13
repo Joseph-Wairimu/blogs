@@ -21,3 +21,11 @@ class CommentForm(FlaskForm):
   comment = TextAreaField('Add a Comment:',validators=[DataRequired()])
   username= StringField(' Name:',validators=[DataRequired()])
   submit = SubmitField(' Submit')                                  
+
+
+
+    
+class SubscriberForm(FlaskForm):
+    email = TextAreaField('Email', validators=[DataRequired()])
+    submit = SubmitField('Submit')  
+    

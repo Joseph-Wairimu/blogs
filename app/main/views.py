@@ -20,14 +20,14 @@ def index():
 @main.route('/posts')
 @login_required
 def posts():
-
+    quote = get_quotes()
     Personal_blogs= Post.query.filter_by(category='Personal_blogs').all()
     corporate_blogs = Post.query.filter_by(category='corporate_blogs').all()
     Fashion_blogs= Post.query.filter_by(category='Fashion_blogs').all()
     Lifestyle_blogs = Post.query.filter_by(category='Lifestyle_blogs').all()
     Travel_blogs = Post.query.filter_by(category='Travel_blogs').all()
     posts = Post.query.order_by(Post.added_date.desc()).all()
-    return render_template('blog.html',Personal_blogs=Personal_blogs, corporate_blogs= corporate_blogs, Fashion_blogs= Fashion_blogs,Lifestyle_blogs=Lifestyle_blogs,Travel_blogs=Travel_blogs, posts=posts)
+    return render_template('blog.html',Personal_blogs=Personal_blogs, corporate_blogs= corporate_blogs, Fashion_blogs= Fashion_blogs,Lifestyle_blogs=Lifestyle_blogs,Travel_blogs=Travel_blogs, posts=posts, quote = quote)
 
 @main.route('/new_post', methods=['GET', 'POST'])
 @login_required
