@@ -10,8 +10,8 @@ from ..requests import get_quotes
 
 @main.route('/')
 def index():
-   
-    return render_template('index.html')
+    quote = get_quotes()
+    return render_template('index.html', quote = quote)
 
 
                    
