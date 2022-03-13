@@ -53,10 +53,19 @@ def new_post():
 @main.route('/subscriber', methods=['GET', 'POST'])
 @login_required
 def subscriber():
+    email = request.form.get('email')
+    user = Subscriber.query.filter_by(email=email).first() 
+    if user:
+           flash('Email address already subscribed.')
+           return redirect(url_for('.subscriber'))
+
+
     subscriber_form = SubscriberForm()
+  
     if subscriber_form.validate_on_submit():
         new_subscriber = Subscriber( email=subscriber_form.email.data)
         new_subscriber.save_subscriber()
+       
         flash('Email has been submitted successfully', 'success')
 
     return render_template('subscribe.html', subscriber_form=subscriber_form)
