@@ -10,11 +10,11 @@
        
         <div class="card-body">
            
-            <div class="card-title">{{post.title}}</div>
+            <div class="card-title"  style="color:#95389E ; font-size: 1.5rem;">{{post.title}}</div>
             
             <p class="card-text" style="font-family: 'IM Fell English', serif;">{{post.post}}</p>
-            <p class="card-text">Posted on ~{{post.added_date.strftime('%b %d, %Y')}}</p>
-            <h6 class="post-name">Posted by ~ {{post.username}}</h6>
+            <p class="card-text"><span style="color:#95389E ;">Posted on ~ </span>{{post.added_date.strftime('%b %d, %Y')}}</p>
+            <h6 class="post-name"> <span style="color:#95389E ;">Posted by ~ </span> {{post.username}}</h6>
                 
             </button>
          
