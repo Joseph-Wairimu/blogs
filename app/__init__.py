@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_uploads import UploadSet,configure_uploads,IMAGES
 from flask_mail import Mail
 from flask_simplemde import SimpleMDE
+import os
 
 
 login_manager = LoginManager()
@@ -22,7 +23,8 @@ def create_app(config_name):
     # Creating the app configurations
     app.config.from_object(config_options[config_name])
     config_options[config_name].init_app(app)
-    
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     bootstrap.init_app(app)
     db.init_app(app)
