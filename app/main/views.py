@@ -6,6 +6,7 @@ from ..models import  User,Post,Comment,Subscriber
 from .. import db
 from flask.helpers import flash
 from ..request import get_quotes
+from ..email import mail_message
 #....
 
 @main.route('/')
@@ -63,8 +64,10 @@ def subscriber():
     if subscriber_form.validate_on_submit():
         new_subscriber = Subscriber( email=subscriber_form.email.data)
         new_subscriber.save_subscriber()
-       
+
+        
         flash('Email has been submitted successfully', 'success')
+        mail_message("Welcome to Blog site","email/Subscriber_user",new_subscriber.email,new_subscriber= new_subscriber)
 
     return render_template('subscribe.html', subscriber_form=subscriber_form)
 

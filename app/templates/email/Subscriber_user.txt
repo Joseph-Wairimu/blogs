@@ -1,0 +1,3 @@
+Hello {{new_subscriber.username}}
+Welcome to Blog site
+We have just seen you have signed up for our updates and want to welcome you to the family. Please enjoy the blogs.
