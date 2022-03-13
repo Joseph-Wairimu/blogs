@@ -1,7 +1,11 @@
 
 
 
-<div class="hero-head">
+
+
+
+
+  <div class="hero-head">
     <nav class="navbar is-black">
         <div class="container">
             <a class="navbar-brand" href="/" style="color: #ffff ;"> BLOGS</a>
@@ -27,7 +31,7 @@
                     
                     <a class="navbar-item" style="color:white;" href="{{ url_for('main.subscriber') }}">Subscribe</a>
                     
-                     
+                     <div class="navbar-item">
                     <div class="dropdown is-active">
                         <div class="dropdown-trigger">
                           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -54,25 +58,9 @@
                           </div>
                         </div>
                       </div>
-
+                     </div>
                       {% endif %}
-                      <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-                        if ($navbarBurgers.length > 0) {
-                          $navbarBurgers.forEach(function ($el) {
-                            $el.addEventListener('click', function () {
-                        e
-                              var target = $el.dataset.target;
-                              var $target = document.getElementById(target);
-                              $el.classList.toggle('is-active');
-                              $target.classList.toggle('is-active');
-                            });
-                          });
-                        }
-                        });
-                        </script>
-
+                    
 
 
 
@@ -85,4 +73,10 @@
     </nav>
 </div>
 
-
+<script>
+  var dropdown = document.querySelector('.dropdown');
+dropdown.addEventListener('click', function(event) {
+  event.stopPropagation();
+  dropdown.classList.toggle('is-active');
+});
+</script>

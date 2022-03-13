@@ -56,10 +56,8 @@ def subscriber():
     email = request.form.get('email')
     user = Subscriber.query.filter_by(email=email).first() 
     if user:
-           flash('Email address already subscribed.')
-           return redirect(url_for('.subscriber'))
-
-
+        flash('Email address already subscribed.','danger')
+        return redirect(url_for('.subscriber'))
     subscriber_form = SubscriberForm()
   
     if subscriber_form.validate_on_submit():
