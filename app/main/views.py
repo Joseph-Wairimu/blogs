@@ -41,7 +41,7 @@ def new_post():
         category = form.category.data
         user_id = current_user._get_current_object().id
       
-        new_post=Post(title=title,post=post,category=category ,username=username )
+        new_post=Post(title=title,post=post ,username=username,category=category )
         new_post.save()
         db.session.add(new_post)
         db.session.commit()

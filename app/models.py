@@ -25,6 +25,7 @@ class Post(db.Model):
     post = db.Column(db.String(255))
     category = db.Column(db.String(255))
     title = db.Column(db.String(255))
+    username = db.Column(db.String(255))
     vote_count = db.Column(db.Integer)
     added_date = db.Column(db.DateTime,default=datetime.utcnow)
     author = db.Column(db.Integer,db.ForeignKey('users.id'))
