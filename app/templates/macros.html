@@ -13,8 +13,8 @@
             <div class="card-title">{{post.title}}</div>
             
             <p class="card-text" style="font-family: 'IM Fell English', serif;">{{post.post}}</p>
-            <p class="card-text">{{post.added_date.strftime('%b %d, %Y')}}</p>
-            <h6 class="post-name">Posted by ~ {{post.author.username}}</h6>
+            <p class="card-text">Posted on ~{{post.added_date.strftime('%b %d, %Y')}}</p>
+            <h6 class="post-name">Posted by ~ {{post.author}}</h6>
                 
             </button>
          
