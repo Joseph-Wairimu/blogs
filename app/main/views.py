@@ -1,7 +1,7 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required, current_user
-from .forms import UpdateProfile,BlogForm,CommentForm
+from .forms import UpdateProfile,BlogForm,CommentForm,SubscriberForm
 from ..models import  User,Post,Comment
 from .. import db
 from flask.helpers import flash
@@ -48,6 +48,22 @@ def new_post():
         flash('Your blog has been created successfully!')
         return redirect(url_for('.posts',uname=current_user.username))
     return render_template('recent_blog.html', form=form ,title='Blog ')
+
+
+@main.route('/subscriber', methods=['GET', 'POST'])
+@login_required
+def subscriber():
+    subscriber_form = SubscriberForm()
+    if subscriber_form.validate_on_submit():
+        new_subscriber = Subscriber( email=subscriber_form.email.data)
+        new_subscriber.save_subscriber()
+        flash('Email has been submitted successfully', 'success')
+
+    return render_template('subscribe.html', subscriber_form=subscriber_form)
+
+
+
+
 
 @main.route('/user/<uname>')
 @login_required
