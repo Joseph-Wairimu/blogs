@@ -5,6 +5,7 @@ from .forms import UpdateProfile,BlogForm,CommentForm
 from ..models import  User,Post,Comment
 from .. import db
 from flask.helpers import flash
+from ..requests import get_quotes
 #....
 
 @main.route('/')
