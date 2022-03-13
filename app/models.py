@@ -55,4 +55,25 @@ class Comment(db.Model):
         db.session.delete(self)
         db.session.commit()
     def __repr__(self):
-        return f'Comment: {self.comment}'        
+        return f'Comment: {self.comment}'  
+
+
+       
+        
+class Subscriber(db.Model):
+    __tablename__ = 'subscribers'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True, index=True)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def save_subscriber(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_subscribers(cls):
+        subscribers = Subscriber.query.all()
+        return subscribers
+
+    def __repr__(self):
+        return f'Subscriber {self.email}'               
